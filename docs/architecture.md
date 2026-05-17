@@ -133,3 +133,8 @@ Benefits:
 ## Swap Sequence Diagram
 
 ![Swap Sequence](diagrams/swap-sequence.png)
+---
+
+## Loot Drop Sequence Diagram
+
+![Loot Drop Sequence](diagrams/lootdrop-sequence.png)
