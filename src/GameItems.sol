@@ -37,4 +37,8 @@ contract GameItems is ERC1155, Ownable {
         require(itemInfo[itemId].exists, "Item does not exist");
         return itemInfo[itemId].uri;
     }
+
+    function getNextItemId() external view returns (uint256) {
+        return nextItemId;
+    }
 }
