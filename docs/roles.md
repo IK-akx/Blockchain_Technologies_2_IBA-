@@ -14,5 +14,4 @@ Each team member is responsible for their area, but **everyone must understand t
 
 - Scenario: Option B (GameFi Economy)
 - L2: Arbitrum Sepolia (tentative)
-- Repository: [URL]
-- Instructor approval date: [Дата]
+- Repository: [https://github.com/IK-akx/Blockchain_Technologies_2_IBA-]

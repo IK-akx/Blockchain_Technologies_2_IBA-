@@ -6,9 +6,9 @@ Blockchain Technologies 2 — Final Project
 
 | Role | Name |
 |------|------|
-| Smart Contract Lead | [Имя] |
-| Testing & Security Lead | [Имя] |
-| Frontend & Subgraph Lead | [Имя] |
+| Smart Contract Lead & Testing | [Iskander Kustayev] |
+|  Doc & Security Lead | [Alzira Kuanyshbekova] |
+| Frontend & Subgraph Lead | [Bekbolat Yergalyuly] |
 
 ## Scenario
 
