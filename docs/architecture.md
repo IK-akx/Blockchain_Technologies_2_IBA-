@@ -123,9 +123,13 @@ Benefits:
 ## System Context Diagram
 
 ![System Context](diagrams/system-context.png)
-
 ---
 
 ## Container Diagram
 
 ![Container Diagram](diagrams/container-diagram.png)
+---
+
+## Swap Sequence Diagram
+
+![Swap Sequence](diagrams/swap-sequence.png)
