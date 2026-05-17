@@ -117,3 +117,9 @@ Purpose:
 Benefits:
 - upgrade flexibility
 - long-term maintainability
+
+---
+
+## System Context Diagram
+
+![System Context](diagrams/system-context.png)
