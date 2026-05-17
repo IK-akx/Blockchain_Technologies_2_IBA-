@@ -116,3 +116,45 @@ Consider decentralized IPFS-hosted immutable metadata.
 
 Status:
 Acknowledged
+---
+
+## Slither Static Analysis
+
+The protocol security review included static analysis using the Slither framework.
+
+### Analysis Goals
+
+Slither was used to identify:
+- unsafe external calls
+- access control issues
+- reentrancy risks
+- uninitialized storage variables
+- shadowed state variables
+- gas optimization opportunities
+
+### Security Review Summary
+
+The current protocol version aims to maintain:
+
+- 0 High severity findings
+- 0 Medium severity findings
+
+Low and informational findings are documented in this report.
+
+### Security Measures Observed
+
+The protocol currently includes:
+- SafeERC20 usage
+- access control restrictions
+- reserve validation
+- slippage protection
+- input validation checks
+- immutable token references
+
+### Recommended Improvements
+
+Future protocol versions should additionally include:
+- ReentrancyGuard integration
+- broader role separation using AccessControl
+- expanded invariant testing
+- governance-controlled upgrade execution
