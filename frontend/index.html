@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameFi Protocol</title>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.0/dist/ethers.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .navbar {
+            background: rgba(0,0,0,0.5);
+            padding: 15px 20px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        button {
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover { background: #ff6b6b; }
+        .card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        input, select {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .address { font-size: 12px; color: #aaa; word-break: break-all; }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        .success { background: #10b981; }
+        .info { background: #3b82f6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <h1>🎮 GameFi Protocol</h1>
+            <button id="connectWallet">🔌 Connect Wallet</button>
+        </div>
+
+        <div id="walletInfo" class="card" style="display: none;">
+            <h3>👤 Connected Wallet</h3>
+            <p id="walletAddress" class="address"></p>
+            <p id="walletBalance"></p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>🔄 Swap Resources</h3>
+                <input type="number" id="swapAmount" placeholder="Amount in ETH">
+                <button id="swapButton">Swap</button>
+                <p id="swapOutput" style="margin-top: 10px;"></p>
+            </div>
+
+            <div class="card">
+                <h3>📦 Your Inventory</h3>
+                <div id="inventoryList">Connect wallet to view items</div>
+            </div>
+
+            <div class="card">
+                <h3>💎 Open Loot Box</h3>
+                <button id="openLootBox">🎁 Open (0.001 ETH)</button>
+                <div id="lootResult"></div>
+            </div>
+
+            <div class="card">
+                <h3>📊 Pool Stats</h3>
+                <div id="poolStats">Waiting for deployment...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CONTRACT ADDRESSES - UPDATE AFTER PERSON 1 DEPLOYS!
+        const CONTRACTS = {
+            GAME_ITEMS: "0x0000000000000000000000000000000000000000",
+            RESOURCE_AMM: "0x0000000000000000000000000000000000000000",
+            LOOT_BOX: "0x0000000000000000000000000000000000000000"
+        };
+
+        let provider, signer, userAddress;
+        let gameItemsContract, ammContract, lootBoxContract;
+
+        document.getElementById('connectWallet').onclick = async () => {
+            if (typeof window.ethereum !== 'undefined') {
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                userAddress = accounts[0];
+                provider = new ethers.BrowserProvider(window.ethereum);
+                signer = await provider.getSigner();
+                
+                document.getElementById('connectWallet').style.display = 'none';
+                document.getElementById('walletInfo').style.display = 'block';
+                document.getElementById('walletAddress').innerText = `Address: ${userAddress}`;
+                
+                const balance = await provider.getBalance(userAddress);
+                document.getElementById('walletBalance').innerHTML = `Balance: ${ethers.formatEther(balance)} ETH`;
+                
+                await loadInventory();
+            } else {
+                alert('Please install MetaMask!');
+            }
+        };
+
+        async function loadInventory() {
+            document.getElementById('inventoryList').innerHTML = 'Inventory loading... (waiting for contract deployment)';
+        }
+
+        document.getElementById('swapButton').onclick = async () => {
+            alert('Swap feature ready after Person 1 deploys contracts');
+        };
+
+        document.getElementById('openLootBox').onclick = async () => {
+            alert('Loot box ready after Person 1 deploys contracts');
+        };
+
+        console.log('Frontend ready! Waiting for Person 1 to deploy contracts to:', CONTRACTS);
+    </script>
+</body>
+</html>
