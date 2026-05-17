@@ -59,7 +59,7 @@ jobs:
 
       # ----- Coverage (≥90% required) -----
       - name: Run Forge coverage
-        run: forge coverage --report lcov --match-path "test/Week7.t.sol" --match-path "test/Week8.t.sol"
+        run: forge coverage --report lcov --match-path "test/Week{7,8}.t.sol"
 
       # Upload coverage report as artifact (for checking)
       - name: Upload coverage report
