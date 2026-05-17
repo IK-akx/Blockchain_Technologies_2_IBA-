@@ -143,3 +143,37 @@ Benefits:
 ## Governance Voting Sequence Diagram
 
 ![Governance Sequence](diagrams/governance-sequence.png)
+---
+
+## Upgrade Path (V1 → V2)
+
+The protocol plans to support upgradeable contracts using the UUPS proxy architecture.
+
+### Selected Upgradeable Contract
+
+`RentalVault4626.sol`
+
+### Motivation for Upgradeability
+
+The vault contract is expected to evolve over time due to:
+- additional reward mechanisms
+- improved yield strategies
+- security improvements
+- governance-controlled parameter updates
+
+### Upgrade Flow
+
+1. Deploy Vault V1 implementation
+2. Deploy UUPS proxy pointing to V1
+3. Store user balances and vault state inside the proxy storage
+4. Develop Vault V2 implementation
+5. Governance approves upgrade proposal
+6. Timelock executes upgrade transaction
+7. Proxy points to the new V2 implementation
+
+### Benefits
+
+- preserves storage and user balances
+- allows future protocol improvements
+- enables post-deployment bug fixes
+- improves long-term maintainability
