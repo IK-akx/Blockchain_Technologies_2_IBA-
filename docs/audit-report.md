@@ -230,3 +230,74 @@ Mitigation:
 - voting snapshots
 - ERC20Votes checkpointing
 - delayed proposal execution
+---
+
+## Oracle and Randomness Risk Analysis
+
+### 1. Predictable Randomness Risk
+
+Risk:
+
+Using block variables such as `block.timestamp` or `blockhash` for randomness may allow manipulation by validators or block producers.
+
+Potential Impact:
+- unfair loot distribution
+- predictable rewards
+- exploitable game mechanics
+
+Mitigation:
+- use Chainlink VRF
+- use verifiable randomness sources
+- avoid deterministic block-based randomness
+
+---
+
+### 2. Oracle Dependency Risk
+
+Risk:
+
+The protocol depends on external randomness infrastructure.
+
+Potential Impact:
+- delayed loot distribution
+- failed randomness requests
+- temporary protocol disruption
+
+Mitigation:
+- fallback request handling
+- retry mechanisms
+- monitoring of VRF request fulfillment
+
+---
+
+### 3. Randomness Replay Risk
+
+Risk:
+
+Improper randomness request tracking may allow duplicate fulfillment or replay scenarios.
+
+Potential Impact:
+- duplicated rewards
+- repeated loot minting
+
+Mitigation:
+- unique request identifiers
+- request status tracking
+- single-use fulfillment validation
+
+---
+
+### 4. Reward Distribution Manipulation
+
+Risk:
+
+Improper reward probability implementation may unintentionally favor specific outcomes.
+
+Potential Impact:
+- unfair reward allocation
+- economic imbalance
+
+Mitigation:
+- transparent reward logic
+- probability audits
+- governance-reviewed reward parameters
