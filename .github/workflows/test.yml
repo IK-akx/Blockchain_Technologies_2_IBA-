@@ -75,8 +75,8 @@ jobs:
           solc-select use 0.8.24
 
       - name: Run Slither
-        run: slither . --checklist --json slither-output.json
-        continue-on-error: false   # должен быть 0 High/Medium
+        run: slither . --config-file slither.config.json --checklist --json slither-output.json
+        continue-on-error: false   
 
       - name: Upload Slither results
         uses: actions/upload-artifact@v4

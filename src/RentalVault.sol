@@ -4,7 +4,7 @@ pragma solidity ^0.8.24;
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract RentalVault is Ownable {
-    uint256 public version;
+    uint256 public immutable version;
     mapping(address => uint256) public deposits;
 
     constructor(address initialOwner) Ownable(initialOwner) {
