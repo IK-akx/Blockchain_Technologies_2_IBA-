@@ -138,3 +138,8 @@ Benefits:
 ## Loot Drop Sequence Diagram
 
 ![Loot Drop Sequence](diagrams/lootdrop-sequence.png)
+---
+
+## Governance Voting Sequence Diagram
+
+![Governance Sequence](diagrams/governance-sequence.png)
