@@ -22,7 +22,7 @@ contract GameItems is ERC1155, Ownable {
     function createItem(string memory uri_, uint256 _maxSupply) external onlyOwner returns (uint256) {
         uint256 itemId = nextItemId++;
         itemInfo[itemId] = ItemInfo(uri_, _maxSupply, 0, true);
-        emit ItemCreated(itemId, uri_, _maxSupply);   // было _uri, исправьте на uri_
+        emit ItemCreated(itemId, uri_, _maxSupply); // было _uri, исправьте на uri_
         return itemId;
     }
 

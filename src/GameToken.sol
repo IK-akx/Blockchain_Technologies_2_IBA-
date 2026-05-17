@@ -11,12 +11,12 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * @dev ERC20 with voting and permit, mintable only by owner (later Timelock)
  */
 contract GameToken is ERC20, ERC20Permit, ERC20Votes, Ownable {
-    constructor(string memory _name, string memory _symbol) 
-        ERC20(_name, _symbol) 
-        ERC20Permit(_name) 
-        Ownable(msg.sender) 
+    constructor(string memory _name, string memory _symbol)
+        ERC20(_name, _symbol)
+        ERC20Permit(_name)
+        Ownable(msg.sender)
     {}
-    
+
     function mint(address to, uint256 amount) external onlyOwner {
         _mint(to, amount);
     }
