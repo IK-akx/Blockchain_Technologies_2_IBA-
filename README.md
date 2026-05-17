@@ -1,66 +1,50 @@
-## Foundry
+# GameFi Economy — Option B
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+Blockchain Technologies 2 — Final Project
 
-Foundry consists of:
+## Team
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+| Role | Name |
+|------|------|
+| Smart Contract Lead | [Имя] |
+| Testing & Security Lead | [Имя] |
+| Frontend & Subgraph Lead | [Имя] |
 
-## Documentation
+## Scenario
 
-https://book.getfoundry.sh/
+**Option B — GameFi Economy**: ERC-1155 items, crafting, AMM for resources, NFT rental vault, Chainlink VRF, DAO governance, L2 deployment.
 
-## Usage
+## Tech Stack
 
-### Build
+- Foundry (Solidity 0.8.24)
+- OpenZeppelin contracts
+- Chainlink VRF + Price Feeds
+- The Graph
+- React + Wagmi/Viem
+- L2: Arbitrum Sepolia
 
-```shell
-$ forge build
+## Project Structure
+src/ # smart contracts
+test/ # forge tests (unit, fuzz, invariant, fork)
+script/ # deployment scripts
+frontend/ # dApp (to be added)
+subgraph/ # The Graph configuration
+docs/ # architecture, audit, gas reports
+
+
+## Setup
+
+```bash
+forge install
+forge build
+forge test
 ```
 
-### Test
+## CI
+GitHub Actions runs:
+- forge build
+- forge test
+- forge fmt --check
+- solhint
+- forge coverage
 
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
