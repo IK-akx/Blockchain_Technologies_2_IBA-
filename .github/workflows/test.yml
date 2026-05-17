@@ -75,7 +75,7 @@ jobs:
           solc-select use 0.8.24
 
       - name: Run Slither
-        run: slither . --config-file slither.config.json --checklist --json slither-output.json
+        run: slither . --config-file slither.config.json --checklist --json slither-output.json --fail-high
         continue-on-error: false   
 
       - name: Upload Slither results
