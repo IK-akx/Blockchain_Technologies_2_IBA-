@@ -41,3 +41,79 @@ Factory contract for deploying protocol components.
 
 ### YulHelper.sol
 Yul assembly optimization helper contract.
+
+---
+
+## Design Patterns
+
+### 1. Factory Pattern
+
+The protocol uses the Factory pattern through `GameFactory.sol`.
+
+Purpose:
+- deploy modular protocol components
+- simplify contract creation
+- support scalable architecture
+
+Benefits:
+- reusable deployment logic
+- improved modularity
+- easier future expansion
+
+---
+
+### 2. Access Control Pattern
+
+The protocol uses OpenZeppelin `Ownable` access control.
+
+Used in:
+- GameToken.sol
+- GameItems.sol
+- administrative functions
+
+Purpose:
+- restrict privileged operations
+- protect minting and item creation
+- secure protocol administration
+
+---
+
+### 3. Checks-Effects-Interactions (CEI)
+
+The protocol follows the CEI security pattern in liquidity and transfer operations.
+
+Purpose:
+- reduce reentrancy risks
+- ensure safe state updates before external calls
+
+Benefits:
+- safer token transfer flow
+- improved smart contract security
+
+---
+
+### 4. Pull-over-Push Pattern
+
+The protocol uses pull-based withdrawal logic in liquidity removal and vault interactions.
+
+Purpose:
+- allow users to withdraw funds themselves
+- reduce failed transfer risks
+
+Benefits:
+- safer asset withdrawals
+- improved reliability
+
+---
+
+### 5. Upgradeable Proxy Pattern (UUPS)
+
+The protocol plans to support upgradeable contracts using the UUPS proxy architecture.
+
+Purpose:
+- allow future protocol upgrades
+- support bug fixes and feature expansion
+
+Benefits:
+- upgrade flexibility
+- long-term maintainability
