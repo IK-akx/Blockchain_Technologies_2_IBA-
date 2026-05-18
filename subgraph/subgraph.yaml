@@ -1,0 +1,26 @@
+specVersion: 1.2.0
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: GameItems
+    network: sepolia
+    source:
+      address: "0x31E53C56AbDF6D2ba9aD5bB7aC2966794b08C16C"
+      abi: GameItems
+      startBlock: 10870000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Item
+        - PlayerItem
+        - Player
+      abis:
+        - name: GameItems
+          file: ./abis/GameItems.json
+      eventHandlers:
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+      file: ./src/mappings/gameItems.ts

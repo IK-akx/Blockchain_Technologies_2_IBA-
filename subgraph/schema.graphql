@@ -1,0 +1,38 @@
+type Player @entity {
+  id: ID!
+  address: Bytes!
+  ggtBalance: BigInt!
+  totalSwaps: BigInt!
+  totalLootBoxes: BigInt!
+  items: [PlayerItem!]! @derivedFrom(field: "player")
+}
+
+type Item @entity {
+  id: ID!
+  itemId: BigInt!
+  name: String!
+  itemType: String!
+  totalSupply: BigInt!
+}
+
+type PlayerItem @entity {
+  id: ID!
+  player: Player!
+  item: Item!
+  balance: BigInt!
+}
+
+type Swap @entity {
+  id: ID!
+  trader: Player!
+  amountIn: BigInt!
+  amountOut: BigInt!
+  timestamp: BigInt!
+}
+
+type LootRequest @entity {
+  id: ID!
+  player: Player!
+  status: String!
+  requestedAt: BigInt!
+}

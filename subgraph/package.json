@@ -1,0 +1,14 @@
+{
+  "name": "gamefi-protocol",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --studio gamefi-protocol"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.68.0",
+    "@graphprotocol/graph-ts": "^0.32.0"
+  }
+}

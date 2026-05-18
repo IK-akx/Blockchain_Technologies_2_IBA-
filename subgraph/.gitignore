@@ -1,0 +1,77 @@
+# ============ Environment Variables ============
+.env
+.env.local
+.env.*.local
+frontend/.env
+frontend/.env.local
+
+# ============ Dependencies ============
+node_modules/
+frontend/node_modules/
+lib/
+
+# ============ Build Outputs ============
+out/
+cache/
+broadcast/
+frontend/dist/
+frontend/build/
+
+# ============ Foundry ============
+forge-cache/
+*.log
+*.trace
+
+# ============ IDE ============
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ============ OS Files ============
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============ Logs ============
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ============ Test Coverage ============
+coverage/
+lcov.info
+coverage.json
+
+# ============ Temporary Files ============
+*.tmp
+*.temp
+.cache/
+
+# ============ Subgraph ============
+subgraph/build/
+subgraph/generated/
+subgraph/node_modules/
+subgraph/.env
+
+# ============ Frontend Specific ============
+frontend/.vite/
+frontend/node_modules/
+frontend/package-lock.json
+frontend/yarn.lock
+
+# ============ Deployment Broadcasts ============
+broadcast/
+*.json
+!package.json
+!tsconfig.json
+!foundry.toml
+
+# ============ Secrets ============
+*.pem
+*.key
+*.p12
+secrets/
