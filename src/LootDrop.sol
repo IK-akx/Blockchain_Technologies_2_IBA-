@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-import "@chainlink/contracts/src/v0.8/vrf/interfaces/VRFCoordinatorV2Interface.sol";
+import "@chainlink/contracts/src/v0.8/vrf/VRFV2WrapperConsumerBase.sol";
+import "@chainlink/contracts/src/v0.8/shared/interfaces/LinkTokenInterface.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./GameItems.sol";
 
-contract LootDrop is Ownable {
-    VRFCoordinatorV2Interface public COORDINATOR;
-    uint64 public subscriptionId;
-    bytes32 public keyHash;
-    uint32 public callbackGasLimit = 250000;
-    uint16 public requestConfirmations = 3;
-    uint32 public numWords = 1;
+contract LootDrop is VRFV2WrapperConsumerBase, Ownable {
+    // Sepolia VRF V2 Wrapper
+    address constant WRAPPER_ADDRESS = 0xab18414CD93297B0d12ac29E63Ca20f515b3DB46;
+    address constant LINK_ADDRESS = 0x779877A7B0D9E8603169DdbD7836e478b4624789;
     
-    uint256 public lastRequestId;
+    uint32 constant callbackGasLimit = 300000;
+    uint16 constant requestConfirmations = 3;
+    uint32 constant numWords = 1;
     
     mapping(uint256 => address) public requestToPlayer;
     GameItems public gameItems;
@@ -21,15 +21,10 @@ contract LootDrop is Ownable {
     event LootRequested(uint256 indexed requestId, address indexed player);
     event LootDropped(address indexed player, uint256 itemId);
     
-    constructor(
-        address _vrfCoordinator,
-        uint64 _subId,
-        bytes32 _keyHash,
-        address _gameItems
-    ) Ownable(msg.sender) {
-        COORDINATOR = VRFCoordinatorV2Interface(_vrfCoordinator);
-        subscriptionId = _subId;
-        keyHash = _keyHash;
+    constructor(address _gameItems)
+        VRFV2WrapperConsumerBase(LINK_ADDRESS, WRAPPER_ADDRESS)
+        Ownable(msg.sender)
+    {
         gameItems = GameItems(_gameItems);
     }
     
@@ -38,22 +33,17 @@ contract LootDrop is Ownable {
     function requestLoot() external payable {
         require(msg.value >= 0.001 ether, "Need 0.001 ETH");
         
-        uint256 requestId = COORDINATOR.requestRandomWords(
-            keyHash,
-            subscriptionId,
-            requestConfirmations,
+        uint256 requestId = requestRandomness(
             callbackGasLimit,
+            requestConfirmations,
             numWords
         );
         
         requestToPlayer[requestId] = msg.sender;
-        lastRequestId = requestId;
         emit LootRequested(requestId, msg.sender);
     }
     
-    function rawFulfillRandomWords(uint256 requestId, uint256[] memory randomWords) external {
-        require(msg.sender == address(COORDINATOR), "Only coordinator");
-        
+    function fulfillRandomWords(uint256 requestId, uint256[] memory randomWords) internal override {
         address player = requestToPlayer[requestId];
         if (player == address(0)) return;
         
@@ -64,5 +54,13 @@ contract LootDrop is Ownable {
         uint256 itemId = random % totalItems;
         gameItems.mintItem(player, itemId, 1);
         emit LootDropped(player, itemId);
+    }
+    
+    function withdrawLink() external onlyOwner {
+        LinkTokenInterface link = LinkTokenInterface(LINK_ADDRESS);
+        uint256 balance = link.balanceOf(address(this));
+        if (balance > 0) {
+            link.transfer(msg.sender, balance);
+        }
     }
 }
