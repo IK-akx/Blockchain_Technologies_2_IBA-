@@ -1,0 +1,5 @@
+{
+  "filter_paths": "lib/|out/|cache/",
+  "detectors_to_exclude": "incorrect-exp,divide-before-multiply,unused-return",
+  "exclude_dependencies": true
+}
