@@ -114,12 +114,7 @@ contract DeployAll is Script {
         address vrfCoordinator = vm.envAddress("VRF_COORDINATOR");
         uint64 subId = 1; // You need to create subscription in Chainlink
         
-        LootDrop lootDrop = new LootDrop(
-            vrfCoordinator,
-            subId,
-            vm.envBytes32("VRF_KEYHASH"),
-            address(gameItems)
-        );
+        LootDrop lootDrop = new LootDrop(address(gameItems));
         console.log("LootDrop:", address(lootDrop));
         
         // ============ 6. DEPLOY RENTAL VAULT (ERC-4626) ============

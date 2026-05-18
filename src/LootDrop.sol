@@ -48,7 +48,7 @@ contract LootDrop is VRFV2WrapperConsumerBase, Ownable {
         if (player == address(0)) return;
         
         uint256 random = randomWords[0];
-        uint256 totalItems = gameItems.nextItemId();
+        uint256 totalItems = gameItems.getNextItemId();
         if (totalItems == 0) return;
         
         uint256 itemId = random % totalItems;

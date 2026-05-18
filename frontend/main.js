@@ -94,10 +94,12 @@ async function updateBalances() {
     if (!contracts.token) return;
     const eth = await provider.getBalance(userAddress);
     const ggt = await contracts.token.balanceOf(userAddress);
+    const ethFormatted = Number(ethers.formatEther(eth)).toFixed(8);
+    const ggtFormatted = Number(ethers.formatEther(ggt)).toFixed(4);
     const ethEl = document.getElementById('ethBalance');
     const ggtEl = document.getElementById('ggtBalance');
-    if (ethEl) ethEl.innerHTML = `ETH: ${ethers.formatEther(eth)}`;
-    if (ggtEl) ggtEl.innerHTML = `GGT: ${ethers.formatEther(ggt)}`;
+    if (ethEl) ethEl.innerHTML = `ETH: ${ethFormatted}`;
+    if (ggtEl) ggtEl.innerHTML = `GGT: ${ggtFormatted}`;
 }
 
 async function loadInventory() {
